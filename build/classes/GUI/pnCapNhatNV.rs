@@ -1,0 +1,9 @@
+gui.pnCapNhatNV$1
+gui.pnCapNhatNV$5
+gui.pnCapNhatNV$4
+gui.pnCapNhatNV$3
+gui.pnCapNhatNV$2
+gui.pnCapNhatNV
+gui.pnCapNhatNV$8
+gui.pnCapNhatNV$7
+gui.pnCapNhatNV$6
