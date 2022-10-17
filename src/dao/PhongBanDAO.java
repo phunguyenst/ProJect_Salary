@@ -5,7 +5,7 @@
 package dao;
 import java.util.ArrayList;
 import Connect.ConnectDB1;
-import Entity.PhongBan;
+import entity.PhongBan;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.List;

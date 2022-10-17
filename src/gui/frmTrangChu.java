@@ -4,9 +4,8 @@
  */
 package gui;
 
-import gui.CongDoanSanPham;
-import gui.FrmSanPham;
-import gui.TimKiemSanPham;
+import GUI.SanPham;
+import GUI.TimKiemSanPham;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -87,7 +86,7 @@ public class frmTrangChu extends javax.swing.JFrame {
                 pnCenter.revalidate();
             }
         });
-        MenuItem subCN5 = new MenuItem("Phân Công", new ActionListener() {
+        MenuItem subCN5 = new MenuItem("Chấm công", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnCenter.removeAll();
@@ -103,21 +102,12 @@ public class frmTrangChu extends javax.swing.JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnCenter.removeAll();
-                pnCenter.add(new FrmSanPham());
+                pnCenter.add(new SanPham());
                 pnCenter.repaint();
                 pnCenter.revalidate();
             }
         });
-        MenuItem subSP1;
-        subSP1 = new MenuItem("Công Đoạn",new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                pnCenter.removeAll();
-                pnCenter.add(new CongDoanSanPham());
-                pnCenter.repaint();
-                pnCenter.revalidate();
-            }
-        });
+        MenuItem subSP1 = new MenuItem("Công Đoạn",null);
         MenuItem subSP2 = new MenuItem("Tìm Kiếm",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

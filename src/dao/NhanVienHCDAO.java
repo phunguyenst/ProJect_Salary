@@ -5,10 +5,10 @@
 package dao;
 
 import java.util.List;
-import Entity.NhanVien;
+import entity.NhanVien;
 import java.util.ArrayList;
 import Connect.ConnectDB1;
-import Entity.PhongBan;
+import entity.PhongBan;
 import java.sql.Connection;
 import java.sql.*;
 import java.util.logging.Level;

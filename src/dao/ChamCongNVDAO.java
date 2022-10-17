@@ -4,12 +4,13 @@
  */
 package dao;
 import java.util.List;
-import Entity.NhanVien;
+import entity.NhanVien;
 import java.util.ArrayList;
 import Connect.ConnectDB1;
-import Entity.PhongBan;
+import entity.PhongBan;
 import java.sql.Connection;
 import java.sql.*;
+import entity.BangCongNV;
 /**
  *
  * @author ADMIN
@@ -36,4 +37,60 @@ public class ChamCongNVDAO {
         }
 	return lst;
     }
+    
+    public boolean chamCongNV(BangCongNV bcnv){
+        ConnectDB1.getInstance();
+	Connection conn = ConnectDB1.getConnection();
+	PreparedStatement pstm = null;
+        try {
+            String sql = "insert into PhieuChamCong_NV values(?,?,?,?,?,?)";
+            pstm = conn.prepareStatement(sql);
+            pstm.setString(1, bcnv.getMaNhanVien().getMaNV());
+            pstm.setString(2, bcnv.getTenNhanVien().getHoTen());
+            pstm.setDate(3, bcnv.getNgayCham());
+            pstm.setBoolean(4, bcnv.isDiLam());
+            pstm.setBoolean(5, bcnv.isNghiPhep());
+            pstm.setBoolean(6, bcnv.isTangCa());
+            pstm.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }finally{
+            try{
+                pstm.close();
+            }catch (SQLException ex){
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    
+    public List<BangCongNV> getAllBC(){
+        List<BangCongNV> lst = new ArrayList<BangCongNV>();
+        try {
+            ConnectDB1.getInstance();
+            Connection conn = ConnectDB1.getConnection();
+            String sql= "select * from PhieuChamCong_NV";
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                int maCong = rs.getInt(1);
+                String maNV = rs.getString(2);
+                String tenNV = rs.getString(3);
+                Date ngayCham = rs.getDate(4);
+                boolean diLam = rs.getBoolean(5);
+                boolean phep = rs.getBoolean(6);
+                boolean tangCa =rs.getBoolean(7);
+                NhanVien nv = new NhanVien(maNV, tenNV);
+                BangCongNV bc = new BangCongNV(maCong, nv, nv, ngayCham, diLam, phep, tangCa);
+                lst.add(bc);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+	return lst;
+    }
+    
 }
+
