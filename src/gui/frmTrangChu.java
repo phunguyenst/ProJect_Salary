@@ -4,9 +4,9 @@
  */
 package gui;
 
-import GUI.CongDoanSanPham;
-import GUI.FrmSanPham;
-import GUI.TimKiemSanPham;
+import gui.CongDoanSanPham;
+import gui.FrmSanPham;
+import gui.TimKiemSanPham;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -87,7 +87,7 @@ public class frmTrangChu extends javax.swing.JFrame {
                 pnCenter.revalidate();
             }
         });
-        MenuItem subCN5 = new MenuItem("Chấm công", new ActionListener() {
+        MenuItem subCN5 = new MenuItem("Phân Công", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 pnCenter.removeAll();

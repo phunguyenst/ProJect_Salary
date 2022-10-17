@@ -65,4 +65,63 @@ public class SanPhamDAO {
         }
      return false;
     }
+    public boolean removeSP(String maSP){
+        ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql = "delete from SanPham where maSP=?";
+        PreparedStatement stmt = null;
+        
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, maSP);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+        
+    }
+    public boolean suaSanPham(SanPham sp){
+         ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql = "update SanPham set tenSP=?,thuongHieu=?,donGia=?,soLuong=?,donViTinh=? where maSP=?";
+        PreparedStatement stmt = null;
+        try {
+            stmt = conn.prepareStatement(sql);
+            stmt.setString(1, sp.getTenSP());
+            stmt.setString(2, sp.getThuongHieu());
+            stmt.setFloat(3, sp.getDonGia());
+            stmt.setInt(4, sp.getSoLuong());
+            stmt.setString(5, sp.getDonViTinh());
+            stmt.setString(6, sp.getMaSP());
+            return stmt.executeUpdate() >0;
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public List<SanPham> timSanPham(String ma){
+        List<SanPham> listSP = new ArrayList<SanPham>();
+        ConnectDB1.getInstance();
+            Connection conn = ConnectDB1.getConnection();
+            String sql= "select * from SanPham where maSP= '"+ma+"'";
+            try {
+             Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String maSP = rs.getString(1);
+                 String tenSP = rs.getString(2);
+                 String thuongHieu = rs.getString(3);
+                 Float donGia = rs.getFloat(4);
+                 int soLuong = rs.getInt(5);
+                 String donViTinh = rs.getString(6);
+                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+                 listSP.add(sp);
+            }
+        } catch (SQLException e) {
+        }
+            return listSP;
+    }
+    
 }

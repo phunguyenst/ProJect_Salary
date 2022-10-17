@@ -144,6 +144,10 @@ public class SanPham {
     public String toString() {
         return "SanPham{" + "maSP=" + maSP + ", TenSP=" + TenSP + ", thuongHieu=" + thuongHieu + ", donGia=" + donGia + ", soLuong=" + soLuong + ", donViTinh=" + donViTinh + '}';
     }
+
+    public String setDonViTinh() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 }

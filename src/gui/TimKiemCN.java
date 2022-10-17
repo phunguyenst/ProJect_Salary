@@ -126,12 +126,12 @@ public class TimKiemCN extends javax.swing.JPanel {
         jRadioButton1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButton1.setText("Nam");
         add(jRadioButton1);
-        jRadioButton1.setBounds(400, 190, 60, 24);
+        jRadioButton1.setBounds(400, 190, 60, 25);
 
         jRadioButton2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jRadioButton2.setText("Nữ");
         add(jRadioButton2);
-        jRadioButton2.setBounds(480, 190, 60, 24);
+        jRadioButton2.setBounds(480, 190, 60, 25);
         add(jSeparator1);
         jSeparator1.setBounds(0, 321, 1209, 10);
 

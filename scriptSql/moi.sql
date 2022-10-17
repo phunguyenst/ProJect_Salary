@@ -361,9 +361,9 @@ INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayTham
 INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayThamGiaCT], [DiaChi], [Sđt], [GioiTinh], [TrinhDo]) VALUES (N'NV03', N'SX', N'Nguyễn Thị Hoàng Khánh',CAST(N'1979-11-03' AS Date),CAST(N'2022-09-21' AS Date),N'Long An',N'0903412123',N'Nữ',N'Đại Học' )
 GO
 
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP01', N'PepSi', N'PepsiCo',15000,250,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP02', N'Cocacola', N'Coca-Cola',12000,200,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP03', N'Sting', N'Coca-Cola',17000,300,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,250,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,200,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,300,N'Thùng' )
 GO
 
 /*INSERT [dbo].[CongDoan] ([MaCĐ], [MaSP], [TenCĐ], [DonGiaCĐ], [SoLuong], [MaRangBuoc],[TrangThai]) VALUES (N'CĐ01', N'', N'Coca-Cola',17000,300,N'Thùng' )
@@ -377,5 +377,5 @@ ALTER DATABASE [QuanLyLuongSanPham] SET  READ_WRITE
 GO
 
 
- /*DROP DATABASE [QuanLyLuongSanPham]*/
+ DROP DATABASE [QuanLyLuongSanPham]
  

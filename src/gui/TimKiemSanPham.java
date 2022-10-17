@@ -2,19 +2,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package GUI;
+package gui;
+
+import Connect.ConnectDB1;
+import javax.swing.table.DefaultTableModel;
+import dao.SanPhamDAO;
+import Entity.SanPham;
+import java.util.ArrayList;
+
+import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author admin
  */
 public class TimKiemSanPham extends javax.swing.JPanel {
-
+    DefaultTableModel modelSP;
+    private  SanPhamDAO spDao;
     /**
      * Creates new form TimKiemSanPham
      */
     public TimKiemSanPham() {
         initComponents();
+         ConnectDB1.getInstance().connect();
+         spDao = new SanPhamDAO();
+        
+        modelSP = (DefaultTableModel) tblSanPham.getModel();
+        DocSanPhamVaoTable();
+    }
+     public void DocSanPhamVaoTable(){
+        modelSP.setRowCount(0);
+        List<SanPham> listSP = spDao.getALLSP();
+        for (SanPham sp : listSP) {
+            Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getThuongHieu(), sp.getDonGia(), sp.getSoLuong(), sp.getDonViTinh()};
+            modelSP.addRow(row);
+        }
+    }
+     public void locSP(){
+        if(cboMaSP.getSelectedItem().equals("Tất Cả")){
+            DocSanPhamVaoTable();
+        }
+        else if(cboMaSP.getSelectedItem().equals("")){
+            modelSP.setRowCount(0);
+        }
+        else{
+            String txtMa = cboMaSP.getSelectedItem().toString();
+            List<SanPham> lst = spDao.timSanPham(txtMa);
+         
+            modelSP.setRowCount(0);
+            for (SanPham sp : lst) {
+              Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getThuongHieu(), sp.getDonGia(), sp.getSoLuong(), sp.getDonViTinh()};
+            modelSP.addRow(row);
+            }
+        }
     }
 
     /**
@@ -31,13 +72,13 @@ public class TimKiemSanPham extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        cboMaSP = new javax.swing.JComboBox<>();
+        txtTenSP = new javax.swing.JTextField();
+        txtThuongHieu = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        tblSanPham = new javax.swing.JTable();
+        cboDonGia = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(1200, 1015));
 
@@ -53,9 +94,16 @@ public class TimKiemSanPham extends javax.swing.JPanel {
 
         jLabel5.setText("Đơn Giá");
 
-        jButton1.setText("Tìm");
+        cboMaSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "\"\"", "Tất Cả", "SP01", "SP02", "SP03", "SP04", "SP05", " " }));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jButton1.setText("Tìm");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tblSanPham.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -66,7 +114,7 @@ public class TimKiemSanPham extends javax.swing.JPanel {
                 "Mã Sản Phẩm", "Tên Sản Phẩm", "Thương Hiệu", "Đơn Giá", "Số Lượng", "Đơn Vị Tính"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblSanPham);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -80,19 +128,19 @@ public class TimKiemSanPham extends javax.swing.JPanel {
                     .addComponent(jLabel3))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jComboBox1, 0, 231, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(cboMaSP, 0, 231, Short.MAX_VALUE)
+                    .addComponent(txtTenSP))
                 .addGap(150, 150, 150)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextField2)
+                    .addComponent(txtThuongHieu)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jButton1))
-                    .addComponent(jComboBox2, 0, 291, Short.MAX_VALUE))
+                    .addComponent(cboDonGia, 0, 291, Short.MAX_VALUE))
                 .addContainerGap(178, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -103,17 +151,18 @@ public class TimKiemSanPham extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2)
+                        .addComponent(cboMaSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtThuongHieu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(42, 42, 42)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cboDonGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(64, 64, 64)
                 .addComponent(jButton1)
                 .addGap(36, 36, 36)
@@ -122,19 +171,25 @@ public class TimKiemSanPham extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          if(!cboMaSP.getSelectedItem().equals("")){
+              locSP();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cboDonGia;
+    private javax.swing.JComboBox<String> cboMaSP;
     private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTable tblSanPham;
+    private javax.swing.JTextField txtTenSP;
+    private javax.swing.JTextField txtThuongHieu;
     // End of variables declaration//GEN-END:variables
 }
