@@ -364,6 +364,13 @@ GO
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,250,N'Thùng' )
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,200,N'Thùng' )
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,300,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP04', N'Nước khoáng i-on Pocari Sweat', N'Warrior',9000,200,N'Chai' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP05', N'Nước tăng lực Warrior hương nho', N'Coca-Cola',10000,300,N'Chai' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP06', N'Nước tinh khiết Aquafina', N'Aquafina',5000,30,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP07', N'Nước tinh khiết Dasani', N'Danasi',17000,300,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP08', N'Sữa trái cây Nutriboost hương cam', N'Nutriboost',35000,20,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP09', N'Nước sữa trái cây TH True Milk cam', N'TH True Juice Milk',17000,300,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP010', N'Nước ngọt Fanta hương xá xị', N'Fanta',17000,300,N'Thùng' )
 GO
 
 /*INSERT [dbo].[CongDoan] ([MaCĐ], [MaSP], [TenCĐ], [DonGiaCĐ], [SoLuong], [MaRangBuoc],[TrangThai]) VALUES (N'CĐ01', N'', N'Coca-Cola',17000,300,N'Thùng' )
@@ -377,5 +384,5 @@ ALTER DATABASE [QuanLyLuongSanPham] SET  READ_WRITE
 GO
 
 
- DROP DATABASE [QuanLyLuongSanPham]
+ --DROP DATABASE [QuanLyLuongSanPham]
  

@@ -3,9 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-import Entity.CongDoan;
+import entity.CongDoan;
 import java.util.List;
-import Entity.SanPham;
+import entity.SanPham;
 import java.util.ArrayList;
 import Connect.ConnectDB1;
 import java.sql.Connection;

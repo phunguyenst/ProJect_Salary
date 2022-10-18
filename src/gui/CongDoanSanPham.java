@@ -7,9 +7,9 @@ package gui;
 import Connect.ConnectDB1;
 import javax.swing.table.DefaultTableModel;
 import dao.SanPhamDAO;
-import Entity.SanPham;
+import entity.SanPham;
 import java.util.ArrayList;
-import Entity.CongDoan;
+import entity.CongDoan;
 import dao.CongDoanSPDAO;
 import java.util.List;
 /**
@@ -256,8 +256,8 @@ public class CongDoanSanPham extends javax.swing.JPanel {
                             .addComponent(jButton4)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(5, 5, 5)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 370, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 548, Short.MAX_VALUE)

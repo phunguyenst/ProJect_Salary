@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Entity;
+package entity;
 
 import java.util.Objects;
 
@@ -11,6 +11,20 @@ import java.util.Objects;
  * @author admin
  */
 public class SanPham {
+
+    /**
+     * @return the Anh
+     */
+    public String getAnh() {
+        return Anh;
+    }
+
+    /**
+     * @param Anh the Anh to set
+     */
+    public void setAnh(String Anh) {
+        this.Anh = Anh;
+    }
 
     /**
      * @return the maSP
@@ -102,6 +116,7 @@ public class SanPham {
     private float donGia;
     private int soLuong;
     private String donViTinh;
+    private String Anh;
 
     public SanPham() {
     }
@@ -118,6 +133,17 @@ public class SanPham {
         this.soLuong = soLuong;
         this.donViTinh = donViTinh;
     }
+
+    public SanPham(String maSP, String TenSP, String thuongHieu, float donGia, int soLuong, String donViTinh, String Anh) {
+        this.maSP = maSP;
+        this.TenSP = TenSP;
+        this.thuongHieu = thuongHieu;
+        this.donGia = donGia;
+        this.soLuong = soLuong;
+        this.donViTinh = donViTinh;
+        this.Anh = Anh;
+    }
+    
 
     @Override
     public int hashCode() {
@@ -142,8 +168,10 @@ public class SanPham {
 
     @Override
     public String toString() {
-        return "SanPham{" + "maSP=" + maSP + ", TenSP=" + TenSP + ", thuongHieu=" + thuongHieu + ", donGia=" + donGia + ", soLuong=" + soLuong + ", donViTinh=" + donViTinh + '}';
+        return "SanPham{" + "maSP=" + maSP + ", TenSP=" + TenSP + ", thuongHieu=" + thuongHieu + ", donGia=" + donGia + ", soLuong=" + soLuong + ", donViTinh=" + donViTinh + ", Anh=" + Anh + '}';
     }
+
+    
 
     public String setDonViTinh() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

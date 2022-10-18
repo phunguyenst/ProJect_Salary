@@ -6,7 +6,8 @@ package dao;
 import java.util.List;
 import java.util.ArrayList;
 import Connect.ConnectDB1;
-import Entity.SanPham;
+import entity.SanPham;
+import java.awt.Image;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.*;
@@ -36,8 +37,10 @@ public class SanPhamDAO {
                  Float donGia = rs.getFloat(4);
                  int soLuong = rs.getInt(5);
                  String donViTinh = rs.getString(6);
-                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+                 String anh = rs.getString(7);
+                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh, anh);
                  listSP.add(sp);
+          
              }
         } catch (Exception e) {
            e.printStackTrace();
@@ -49,7 +52,7 @@ public class SanPhamDAO {
 	Connection conn = ConnectDB1.getConnection();
 	PreparedStatement pstm = null;
         
-        String sql = "insert into SanPham values (?,?,?,?,?,?)";
+        String sql = "insert into SanPham values (?,?,?,?,?,?,?)";
         try {
                pstm = conn.prepareStatement(sql);
                pstm.setString(1, sp.getMaSP());
@@ -58,6 +61,7 @@ public class SanPhamDAO {
                pstm.setFloat(4, sp.getDonGia());
                pstm.setInt(5, sp.getSoLuong());
                pstm.setString(6, sp.getDonViTinh());
+               pstm.setString(7, sp.getAnh());
                return pstm.executeUpdate()>0;
               
         } catch (SQLException e) {
@@ -101,7 +105,7 @@ public class SanPhamDAO {
         }
         return false;
     }
-    public List<SanPham> timSanPham(String ma){
+    public List<SanPham> timSanPhamTheoMa(String ma){
         List<SanPham> listSP = new ArrayList<SanPham>();
         ConnectDB1.getInstance();
             Connection conn = ConnectDB1.getConnection();
@@ -122,6 +126,76 @@ public class SanPhamDAO {
         } catch (SQLException e) {
         }
             return listSP;
+    }
+    
+    public List<SanPham> timSanPhamTheoGia(float giaBD, float giaKT){
+        List<SanPham> listSP = new ArrayList<SanPham>();
+        ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql = "select * from SanPham where DonGia >= "+giaBD+" and DonGia <="+giaKT+"";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String maSP = rs.getString(1);
+                 String tenSP = rs.getString(2);
+                 String thuongHieu = rs.getString(3);
+                 Float donGia = rs.getFloat(4);
+                 int soLuong = rs.getInt(5);
+                 String donViTinh = rs.getString(6);
+                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+                 listSP.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSP;
+    }
+    public List<SanPham> timSPTheoTen(String ten){
+        List<SanPham> listSP = new ArrayList<SanPham>();
+        ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql= "select * from SanPham where tenSP like N'%"+ten+"%'";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String maSP = rs.getString(1);
+                 String tenSP = rs.getString(2);
+                 String thuongHieu = rs.getString(3);
+                 Float donGia = rs.getFloat(4);
+                 int soLuong = rs.getInt(5);
+                 String donViTinh = rs.getString(6);
+                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+                 listSP.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSP;
+    }
+    public List<SanPham> timSPTheoThuongHieu(String ten){
+        List<SanPham> listSP = new ArrayList<SanPham>();
+        ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql= "select * from SanPham where thuongHieu like N'%"+ten+"%'";
+        try {
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while(rs.next()){
+                String maSP = rs.getString(1);
+                 String tenSP = rs.getString(2);
+                 String thuongHieu = rs.getString(3);
+                 Float donGia = rs.getFloat(4);
+                 int soLuong = rs.getInt(5);
+                 String donViTinh = rs.getString(6);
+                 SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+                 listSP.add(sp);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return listSP;
     }
     
 }
