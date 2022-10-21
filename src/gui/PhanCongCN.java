@@ -53,6 +53,7 @@ public class PhanCongCN extends javax.swing.JPanel {
         myButton4 = new custom_button.MyButton();
         myButton5 = new custom_button.MyButton();
         myButton2 = new custom_button.MyButton();
+        jTextField3 = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setLayout(null);
@@ -64,15 +65,15 @@ public class PhanCongCN extends javax.swing.JPanel {
 
         jLabel2.setText("Mã Phân Công");
         add(jLabel2);
-        jLabel2.setBounds(504, 37, 79, 16);
+        jLabel2.setBounds(504, 37, 81, 16);
 
         jLabel3.setText("Mã Công Nhân");
         add(jLabel3);
-        jLabel3.setBounds(504, 77, 81, 16);
+        jLabel3.setBounds(504, 77, 82, 16);
 
         jLabel4.setText("Mã Công Đoạn");
         add(jLabel4);
-        jLabel4.setBounds(504, 117, 80, 16);
+        jLabel4.setBounds(504, 117, 82, 16);
         add(jTextField1);
         jTextField1.setBounds(681, 34, 122, 22);
 
@@ -89,15 +90,15 @@ public class PhanCongCN extends javax.swing.JPanel {
 
         jLabel5.setText("Tên Phân Công");
         add(jLabel5);
-        jLabel5.setBounds(870, 37, 81, 16);
+        jLabel5.setBounds(870, 37, 86, 16);
 
         jLabel6.setText("Tên Nhân Viên");
         add(jLabel6);
-        jLabel6.setBounds(870, 77, 77, 16);
+        jLabel6.setBounds(870, 77, 81, 16);
 
         jLabel7.setText("Số Lượng Cần Làm");
         add(jLabel7);
-        jLabel7.setBounds(870, 117, 100, 16);
+        jLabel7.setBounds(870, 117, 109, 16);
 
         add(jComboBox3);
         jComboBox3.setBounds(1037, 34, 158, 22);
@@ -131,7 +132,7 @@ public class PhanCongCN extends javax.swing.JPanel {
 
         jLabel10.setText("Công Đoạn: ");
         add(jLabel10);
-        jLabel10.setBounds(518, 219, 66, 16);
+        jLabel10.setBounds(518, 219, 69, 16);
 
         jLabel11.setText("_");
         add(jLabel11);
@@ -159,7 +160,7 @@ public class PhanCongCN extends javax.swing.JPanel {
         jScrollPane2.setViewportView(jTable2);
 
         add(jScrollPane2);
-        jScrollPane2.setBounds(7, 351, 1200, 396);
+        jScrollPane2.setBounds(0, 330, 1250, 360);
         add(jSeparator2);
         jSeparator2.setBounds(1, 320, 1209, 10);
 
@@ -201,6 +202,10 @@ public class PhanCongCN extends javax.swing.JPanel {
         });
         add(myButton2);
         myButton2.setBounds(1010, 270, 110, 40);
+
+        jTextField3.setText("jTextField3");
+        add(jTextField3);
+        jTextField3.setBounds(1040, 112, 150, 20);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
@@ -245,6 +250,7 @@ public class PhanCongCN extends javax.swing.JPanel {
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
     private custom_button.MyButton myButton2;
     private custom_button.MyButton myButton4;
     private custom_button.MyButton myButton5;

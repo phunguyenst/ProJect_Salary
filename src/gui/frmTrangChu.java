@@ -4,7 +4,9 @@
  */
 package gui;
 
-
+import gui.FrmSanPham;
+import gui.TimKiemSanPham;
+import entity.SanPham;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -95,19 +97,42 @@ public class frmTrangChu extends javax.swing.JFrame {
             }
         } );
         MenuItem subCN1 = new MenuItem("Cập Nhật",new ActionListener(){
-              @Override
+          @Override
             public void actionPerformed(ActionEvent e) {
                 pnCenter.removeAll();
                 pnCenter.add(new pnCapNhatCN());
                 pnCenter.repaint();
                 pnCenter.revalidate();
-            } 
-        });
-        
+            }
+        } );
         //
-       
-        MenuItem subSP1 = new MenuItem("Công Đoạn",null);
-       
+        MenuItem subSP = new MenuItem("Cập Nhật",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnCenter.removeAll();
+                pnCenter.add(new FrmSanPham());
+                pnCenter.repaint();
+                pnCenter.revalidate();
+            }
+        });
+        MenuItem subSP1 = new MenuItem("Công Đoạn",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnCenter.removeAll();
+                pnCenter.add(new CongDoanSanPham());
+                pnCenter.repaint();
+                pnCenter.revalidate();
+            }
+        });
+        MenuItem subSP2 = new MenuItem("Tìm Kiếm",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnCenter.removeAll();
+                pnCenter.add(new TimKiemSanPham());
+                pnCenter.repaint();
+                pnCenter.revalidate();
+            }
+        });
         
         //Add menu con vao menu chinh
         MenuItem menuTC = new MenuItem(iconTC,"TRANG CHỦ",new ActionListener() {
@@ -123,7 +148,7 @@ public class frmTrangChu extends javax.swing.JFrame {
         
         MenuItem menuNV = new MenuItem(iconNV, "NHÂN VIÊN",null,subNV1,subNV2,subNV3,subNV4);
         MenuItem menuCN = new MenuItem(iconNV, "CÔNG NHÂN",null,subCN1,subCN2,subCN3,subCN4,subCN5);
-        MenuItem menuSP = new MenuItem(iconSP, "SẢN PHẨM",null,subSP1);
+        MenuItem menuSP = new MenuItem(iconSP, "SẢN PHẨM",null,subSP,subSP1,subSP2);
         MenuItem menuTK = new MenuItem(iconTK, "THỐNG KÊ",null);
         addMenu(menuTC,menuNV,menuCN,menuSP,menuTK);
     }
