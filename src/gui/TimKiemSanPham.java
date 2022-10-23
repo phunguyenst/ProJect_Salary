@@ -4,7 +4,7 @@
  */
 package gui;
 
-import Connect.ConnectDB1;
+import connect.ConnectDB1;
 import javax.swing.table.DefaultTableModel;
 import dao.SanPhamDAO;
 import entity.SanPham;

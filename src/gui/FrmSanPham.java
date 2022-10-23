@@ -8,7 +8,7 @@ package gui;
  *
  * @author admin
  */
-import Connect.ConnectDB1;
+import connect.ConnectDB1;
 import javax.swing.table.DefaultTableModel;
 import dao.SanPhamDAO;
 import entity.SanPham;
@@ -47,7 +47,7 @@ public class FrmSanPham extends javax.swing.JPanel {
         modelSP.setRowCount(0);
         List<SanPham> listSP = spDao.getALLSP();
         SanPham sanpham = new SanPham();
-        sanpham.setAnh(duongDanAnh);
+        
         
         for (SanPham sp : listSP) {
             
@@ -57,7 +57,7 @@ public class FrmSanPham extends javax.swing.JPanel {
         }
     }
      public void themSP(){
-         String maSP = txtMaSP.getText().trim();
+         txtMaSP.setText(spDao.getMaSPTuDong());
          String tenSP = txtTenSP.getText().trim();
          String thuongHieu = (String) cboThuongHieu.getSelectedItem();
          float donGia = Float.parseFloat(txtDonGia.getText().trim());
@@ -65,6 +65,7 @@ public class FrmSanPham extends javax.swing.JPanel {
          String donViTinh = cboDonViTinh.getSelectedItem().toString();
         anh = lblAnh.getText().toString();
          List<SanPham> listSP = spDao.getALLSP();
+        String maSP = txtMaSP.getText().trim(); 
          
          SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh,anh);
          
@@ -122,7 +123,8 @@ public class FrmSanPham extends javax.swing.JPanel {
          float donGia = Float.parseFloat(txtDonGia.getText().trim());
          int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
          String donViTinh = cboDonViTinh.getSelectedItem().toString();
-         SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh);
+         String anh = lblAnh.getText();
+         SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh,anh);
          int ques = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa","Attention!",JOptionPane.YES_NO_OPTION);
          if(ques == JOptionPane.YES_OPTION){
              if(spDao.suaSanPham(sp)){

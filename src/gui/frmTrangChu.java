@@ -10,7 +10,10 @@ import entity.SanPham;
 import java.awt.MenuShortcut;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -77,7 +80,15 @@ public class frmTrangChu extends javax.swing.JFrame {
                 pnCenter.revalidate();
             }
         });
-        MenuItem subCN3 = new MenuItem("Chấm Công",null);
+        MenuItem subCN3 = new MenuItem("Chấm Công",new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pnCenter.removeAll();
+                pnCenter.add(new ChamCongCN());
+                pnCenter.repaint();
+                pnCenter.revalidate();
+            }
+        });
         MenuItem subCN4 = new MenuItem("Tính Lương",new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -96,8 +107,15 @@ public class frmTrangChu extends javax.swing.JFrame {
                 pnCenter.revalidate();
             }
         } );
-        MenuItem subCN1 = new MenuItem("Cập Nhật",null);
-        
+        MenuItem subCN1 = new MenuItem("Cập Nhật",new ActionListener(){
+          @Override
+            public void actionPerformed(ActionEvent e) {
+                pnCenter.removeAll();
+                pnCenter.add(new pnCapNhatCN());
+                pnCenter.repaint();
+                pnCenter.revalidate();
+            }
+        } );
         //
         MenuItem subSP = new MenuItem("Cập Nhật",new ActionListener() {
             @Override

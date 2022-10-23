@@ -5,7 +5,7 @@
 package dao;
 import java.util.List;
 import java.util.ArrayList;
-import Connect.ConnectDB1;
+import connect.ConnectDB1;
 import entity.SanPham;
 import java.awt.Image;
 import java.sql.Connection;
@@ -88,7 +88,7 @@ public class SanPhamDAO {
     public boolean suaSanPham(SanPham sp){
          ConnectDB1.getInstance();
         Connection conn = ConnectDB1.getConnection();
-        String sql = "update SanPham set tenSP=?,thuongHieu=?,donGia=?,soLuong=?,donViTinh=? where maSP=?";
+        String sql = "update SanPham set tenSP=?,thuongHieu=?,donGia=?,soLuong=?,donViTinh=?, Anh = ? where maSP=?";
         PreparedStatement stmt = null;
         try {
             stmt = conn.prepareStatement(sql);
@@ -97,7 +97,8 @@ public class SanPhamDAO {
             stmt.setFloat(3, sp.getDonGia());
             stmt.setInt(4, sp.getSoLuong());
             stmt.setString(5, sp.getDonViTinh());
-            stmt.setString(6, sp.getMaSP());
+            stmt.setString(6, sp.getAnh());
+            stmt.setString(7, sp.getMaSP());
             return stmt.executeUpdate() >0;
             
         } catch (SQLException e) {
@@ -196,6 +197,24 @@ public class SanPhamDAO {
             e.printStackTrace();
         }
         return listSP;
+    }
+    
+    
+    //phast sinh max
+    public String getMaSPTuDong() {
+        String maSP="";
+        ConnectDB1.getInstance();
+        Connection conn = ConnectDB1.getConnection();
+        String sql = "select CONCAT('SP', RIGHT(CONCAT('00',ISNULL(right(max(maSP),2),0) + 1),2)) from SanPham where maSP like  'SP%'";
+        try {
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(sql);
+            while(rs.next()) {
+            maSP = rs.getString(1);			}
+	} catch (SQLException e) {
+            e.printStackTrace();
+	}
+	return maSP;
     }
     
 }

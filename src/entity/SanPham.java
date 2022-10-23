@@ -118,12 +118,13 @@ public class SanPham {
     private String donViTinh;
     private String Anh;
 
-    public SanPham() {
-    }
-
     public SanPham(String maSP) {
         this.maSP = maSP;
     }
+
+  
+  
+    
     
     public SanPham(String maSP, String TenSP, String thuongHieu, float donGia, int soLuong, String donViTinh) {
         this.maSP = maSP;
@@ -143,6 +144,26 @@ public class SanPham {
         this.donViTinh = donViTinh;
         this.Anh = Anh;
     }
+
+    public SanPham() {
+    }
+
+    public SanPham(String maSP, String TenSP, int soLuong) {
+        this.maSP = maSP;
+        this.TenSP = TenSP;
+        this.soLuong = soLuong;
+    }
+
+    public SanPham(int soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public SanPham(String maSP, String TenSP) {
+        this.maSP = maSP;
+        this.TenSP = TenSP;
+    }
+    
+   
     
 
     @Override

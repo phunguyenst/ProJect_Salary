@@ -3,16 +3,21 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/ProJect_Salary/src/dao/NhanVienHCDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/gui/CongDoanSanPham.java</file>
             <file>file:/E:/ProJect_Salary/src/gui/frmTrangChu.java</file>
-            <file>file:/E:/ProJect_Salary/src/entity/NhanVien.java</file>
             <file>file:/E:/ProJect_Salary/src/gui/PhanCongCN.java</file>
-            <file>file:/E:/ProJect_Salary/src/gui/TimKiemNV.java</file>
-            <file>file:/E:/ProJect_Salary/src/image/anhsp2.jpg</file>
-            <file>file:/E:/ProJect_Salary/src/dao/PhongBanDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/entity/CongNhan.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/ChamCongCNDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/CaLamViecDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/CongDoanSPDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/SanPhamDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/PhanCongDAO.java</file>
+            <file>file:/E:/ProJect_Salary/src/entity/BangCongCN.java</file>
+            <file>file:/E:/ProJect_Salary/src/gui/ChamCongCN.java</file>
+            <file>file:/E:/ProJect_Salary/src/dao/CongNhanDAO.java</file>
             <file>file:/E:/ProJect_Salary/src/gui/FrmSanPham.java</file>
-            <file>file:/E:/ProJect_Salary/src/dao/ChamCongNVDAO.java</file>
-            <file>file:/E:/ProJect_Salary/src/gui/TimKiemSanPham.java</file>
+            <file>file:/E:/ProJect_Salary/src/entity/SanPham.java</file>
+            <file>file:/E:/ProJect_Salary/src/entity/PhanCong.java</file>
         </group>
     </open-files>
 </project-private>

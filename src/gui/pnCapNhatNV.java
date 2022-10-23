@@ -4,7 +4,7 @@
  */
 package gui;
 
-import Connect.ConnectDB1;
+import connect.ConnectDB1;
 import dao.NhanVienHCDAO;
 import dao.PhongBanDAO;
 import java.text.SimpleDateFormat;

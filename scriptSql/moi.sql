@@ -120,12 +120,12 @@ GO
 CREATE TABLE [dbo].[PhieuCong_CN](
     [MaPhieu] [nvarchar](255) NOT NULL,
     [MaCa] [nvarchar](255) NOT NULL,
-	[MaPhanCong] [nvarchar](255) NOT NULL,
+	[TenCN] [nvarchar](255) NOT NULL,
 	[SoSPChamCong] [int] NOT NULL,
-	[DiLam] [bit] NOT NULL,
-	[NghiPhep] [bit] NOT NULL,
-	[TangCa] [bit] NOT NULL,
+	[MaCĐ] [nvarchar](255) NOT NULL,
+    [TenCĐ] [nvarchar](255) NOT NULL,
 	[NgayCham] [date] NOT NULL,
+	[TrangThai] [bit] NOT NULL,
 	
 )
 GO
@@ -147,9 +147,13 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[PhanCong](
-	[MaPhanCong] [nvarchar](255) NOT NULL,
+	
 	[MaCĐ] [nvarchar](255) NOT NULL,
 	[MaCN] [nvarchar](255) NOT NULL,
+	[TenCN] [nvarchar](255) NOT NULL,
+	[TenCD] [nvarchar](255) NOT NULL,
+	[MaSP] [nvarchar](255) NOT NULL,
+	[TenSP][nvarchar](255) NOT NULL,
 )
 
 GO
@@ -233,6 +237,7 @@ CREATE TABLE [dbo].[SanPham](
 	[DonGia] [float] NOT NULL,
 	[SoLuong] [int] NOT NULL,
 	[DonViTinh] [nvarchar](255) NOT NULL,
+	[Anh] [nvarchar](255) NOT NULL
 )
 
 GO
@@ -244,11 +249,11 @@ GO
 CREATE TABLE [dbo].[CongDoan](
 	[MaCĐ] [nvarchar](255)  NOT NULL,
 	[MaSP] [nvarchar](255) NOT NULL,
+	[TenSP] [nvarchar](255) NOT NULL,
 	[TenCĐ] [nvarchar](255) NOT NULL,
 	[DonGiaCĐ] [float] NOT NULL, 
     [SoLuong] [int] NOT NULL,
-    [MaRangBuoc] [nvarchar](255) NOT NULL,
-	[TrangThai] [bit] NOT NULL,
+    [MaRangBuoc] int NOT NULL,
 ) 
 
 GO
@@ -267,8 +272,7 @@ GO
 ALTER TABLE [dbo].[CaLamViec]  ADD CONSTRAINT [FK_CaLamViec] PRIMARY KEY (MaCa)
 GO
 
-ALTER TABLE [dbo].[PhanCong]  ADD CONSTRAINT [FK_PhanCong] PRIMARY KEY (MaPhanCong)
-GO
+
 
 ALTER TABLE [dbo].[PhongBan]  ADD CONSTRAINT [FK_PhongBan] PRIMARY KEY (MaPB)
 GO
@@ -294,8 +298,7 @@ ALTER TABLE [dbo].[LuongCongNhan]  WITH CHECK ADD  CONSTRAINT [FK_LuongCongNhan_
 REFERENCES [dbo].[PhongBan] ([MaPB])
 GO
 
-ALTER TABLE [dbo].[LuongCongNhan]  WITH CHECK ADD  CONSTRAINT [FK_LuongCongNhan_PhanCong] FOREIGN KEY([MaPhanCong])
-REFERENCES [dbo].[PhanCong] ([MaPhanCong])
+
 GO
 
 ALTER TABLE [dbo].[LuongCongNhan]  WITH CHECK ADD  CONSTRAINT [FK_LuongCongNhan_CaLamViec] FOREIGN KEY([MaPhanCong])
@@ -306,8 +309,7 @@ ALTER TABLE [dbo].[LuongCongNhan]  WITH CHECK ADD  CONSTRAINT [FK_LuongCongNhan_
 REFERENCES [dbo].[PhieuCong_CN] ([MaPhieu])
 GO
 
-ALTER TABLE [dbo].[PhieuCong_CN]  WITH CHECK ADD  CONSTRAINT [FK_PhieuCong_CN_PhanCong] FOREIGN KEY([MaPhanCong])
-REFERENCES [dbo].[PhanCong] ([MaPhanCong])
+
 GO
 
 ALTER TABLE [dbo].[PhieuCong_CN]  WITH CHECK ADD  CONSTRAINT [FK_PhieuCong_CN_CaLamViec] FOREIGN KEY([MaCa])
@@ -320,6 +322,9 @@ GO
 
 ALTER TABLE [dbo].[PhanCong]  WITH CHECK ADD  CONSTRAINT [FK_PhanCong_CongNhan] FOREIGN KEY([MaCN])
 REFERENCES [dbo].[CongNhan] ([MaCN])
+GO
+ALTER TABLE [dbo].[PhanCong]  WITH CHECK ADD  CONSTRAINT [FK_PhanCong_SanPham] FOREIGN KEY([MaSP])
+REFERENCES [dbo].[SanPham] ([MaSP])
 GO
 
 ALTER TABLE [dbo].[CongNhan]  WITH CHECK ADD  CONSTRAINT [FK_CongNhan_PhongBan] FOREIGN KEY([MaPB])
@@ -361,28 +366,45 @@ INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayTham
 INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayThamGiaCT], [DiaChi], [Sđt], [GioiTinh], [TrinhDo]) VALUES (N'NV03', N'SX', N'Nguyễn Thị Hoàng Khánh',CAST(N'1979-11-03' AS Date),CAST(N'2022-09-21' AS Date),N'Long An',N'0903412123',N'Nữ',N'Đại Học' )
 GO
 
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,250,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,200,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,300,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP04', N'Nước khoáng i-on Pocari Sweat', N'Warrior',9000,200,N'Chai' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP05', N'Nước tăng lực Warrior hương nho', N'Coca-Cola',10000,300,N'Chai' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP06', N'Nước tinh khiết Aquafina', N'Aquafina',5000,30,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP07', N'Nước tinh khiết Dasani', N'Danasi',17000,300,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP08', N'Sữa trái cây Nutriboost hương cam', N'Nutriboost',35000,20,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP09', N'Nước sữa trái cây TH True Milk cam', N'TH True Juice Milk',17000,300,N'Thùng' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh]) VALUES (N'SP010', N'Nước ngọt Fanta hương xá xị', N'Fanta',17000,300,N'Thùng' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh], [Anh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,250,N'Thùng', '\\src\image\\anhsp.jpg' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,200,N'Thùng','\\src\image\\anhsp2.jpg' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,300,N'Thùng','\\src\image\\anhsp3.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP04', N'Nước khoáng i-on Pocari Sweat', N'Warrior',9000,200,N'Chai','\\src\image\\anhsp4.jpg' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP05', N'Nước tăng lực Warrior hương nho', N'Coca-Cola',10000,300,N'Chai','\\src\image\\anhsp5.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP06', N'Nước tinh khiết Aquafina', N'Aquafina',5000,30,N'Thùng','\\src\image\\anhsp6.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP07', N'Nước tinh khiết Dasani', N'Danasi',17000,300,N'Thùng','\\src\image\\anhsp7.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP08', N'Sữa trái cây Nutriboost hương cam', N'Nutriboost',35000,20,N'Thùng','\\src\image\\anhsp8.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP09', N'Nước sữa trái cây TH True Milk cam', N'TH True Juice Milk',17000,300,N'Thùng','\\src\image\\anhsp9.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP10', N'Nước ngọt Fanta hương xá xị', N'Fanta',17000,300,N'Thùng','\\src\image\\anhsp10.jpg')
 GO
+go
+
 
 /*INSERT [dbo].[CongDoan] ([MaCĐ], [MaSP], [TenCĐ], [DonGiaCĐ], [SoLuong], [MaRangBuoc],[TrangThai]) VALUES (N'CĐ01', N'', N'Coca-Cola',17000,300,N'Thùng' )
 GO*/
 
-insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD01', N'SP01',N'Công Đoạn 1', 12000, 25, 1,1);
-insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD02', N'SP02',N'Công Đoạn 1', 15000, 35, 2,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD01', N'SP01',N'Công Đoạn 1', 12000, 25, 1,1);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD02', N'SP02',N'Công Đoạn 1', 15000, 35, 2,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD03', N'SP03',N'Công Đoạn 2', 15000, 35, 3,1);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD04', N'SP04',N'Công Đoạn 3', 35000, 45, 4,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD05', N'SP05',N'Công Đoạn 4', 15000, 15, 5,1);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD06', N'SP06',N'Công Đoạn 1', 25000, 25, 6,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD07', N'SP07',N'Công Đoạn 2', 15000, 55, 7,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD08', N'SP08',N'Công Đoạn 3', 35000, 25, 8,1);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD09', N'SP09',N'Công Đoạn 4', 25000, 15, 9,0);
+--insert [dbo].[CongDoan]([MaCĐ],[MaSP],[TenCĐ],[DonGiaCĐ],[SoLuong],[MaRangBuoc],[TrangThai]) values (N'CD10', N'SP10',N'Công Đoạn 1', 15000, 15, 10,1);
 USE [master]
 GO
 ALTER DATABASE [QuanLyLuongSanPham] SET  READ_WRITE 
 GO
 
+INSERT [dbo].[CaLamViec] ([MaCa], [TenCa],[GioLam]) VALUES (N'CA01', N'Sáng',N'7h-11h')
+INSERT [dbo].[CaLamViec] ([MaCa], [TenCa],[GioLam]) VALUES (N'CA02', N'Chiều',N'13h-17h')
+INSERT [dbo].[CaLamViec] ([MaCa], [TenCa],[GioLam]) VALUES (N'CA03', N'Tối',N'18h-23h')
+
+SELECT * FROM SanPham
+
+select CONCAT('SP', RIGHT(CONCAT('00',ISNULL(right(max(maSP),2),0) + 1),2)) from SanPham where maSP like  'SP%'
 
  --DROP DATABASE [QuanLyLuongSanPham]
  

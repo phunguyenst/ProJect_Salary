@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Connect;
+package connect;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -70,6 +70,12 @@ public class ConnectDB1 {
         }
         else{
             System.out.println("ket noi that bai");
+        }
+    }
+
+    public static class getInstance {
+
+        public getInstance() {
         }
     }
 }

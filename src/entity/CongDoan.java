@@ -4,11 +4,24 @@
  */
 package entity;
 
+import java.util.Objects;
+
 /**
  *
  * @author admin
  */
 public class CongDoan {
+
+    public SanPham getTenSP() {
+        return tenSP;
+    }
+
+    /**
+     * @return the tenSP
+     */
+    public void setTenSP(SanPham tenSP) {    
+        this.tenSP = tenSP;
+    }
 
     /**
      * @return the maCD
@@ -66,17 +79,14 @@ public class CongDoan {
         this.donGiaCD = donGiaCD;
     }
 
-    /**
-     * @return the soLuong
-     */
-    public int getSoLuong() {
+    public SanPham getSoLuong() {
         return soLuong;
     }
 
     /**
-     * @param soLuong the soLuong to set
+     * @return the soLuong
      */
-    public void setSoLuong(int soLuong) {
+    public void setSoLuong(SanPham soLuong) {    
         this.soLuong = soLuong;
     }
 
@@ -97,41 +107,69 @@ public class CongDoan {
     /**
      * @return the trangThai
      */
-    public boolean isTrangThai() {
-        return trangThai;
-    }
 
-    /**
-     * @param trangThai the trangThai to set
-     */
-    public void setTrangThai(boolean trangThai) {
-        this.trangThai = trangThai;
-    }
     private String maCD;
     private String tenCD;
     private SanPham maSP;
+    private SanPham tenSP;
     private float donGiaCD;
-    private int soLuong;
+    private SanPham soLuong;
     private int maRangBuoc;
-    private boolean trangThai;
+   
 
-    public CongDoan(String maCD, String tenCD, SanPham maSP, float donGiaCD, int soLuong, int maRangBuoc, boolean trangThai) {
+    public CongDoan(String maCD, String tenCD, SanPham maSP, SanPham tenSP, float donGiaCD, SanPham soLuong, int maRangBuoc) {
         this.maCD = maCD;
         this.tenCD = tenCD;
         this.maSP = maSP;
+        this.tenSP = tenSP;
         this.donGiaCD = donGiaCD;
         this.soLuong = soLuong;
         this.maRangBuoc = maRangBuoc;
-        this.trangThai = trangThai;
+     
     }
+
+    public CongDoan(String maCD, String tenCD, SanPham soLuong) {
+        this.maCD = maCD;
+        this.tenCD = tenCD;
+        this.soLuong = soLuong;
+    }
+
+    public CongDoan(SanPham soLuong) {
+        this.soLuong = soLuong;
+    }
+
+    public CongDoan(String maCD, String tenCD) {
+        this.maCD = maCD;
+        this.tenCD = tenCD;
+    }
+    
+
 
     public CongDoan() {
     }
 
     @Override
-    public String toString() {
-        return "CongDoan{" + "maCD=" + maCD + ", tenCD=" + tenCD + ", maSP=" + maSP + ", donGiaCD=" + donGiaCD + ", soLuong=" + soLuong + ", maRangBuoc=" + maRangBuoc + ", trangThai=" + trangThai + '}';
+    public int hashCode() {
+        int hash = 3;
+        return hash;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CongDoan other = (CongDoan) obj;
+        return Objects.equals(this.maCD, other.maCD);
+    }
+
     
+   
     
 }
