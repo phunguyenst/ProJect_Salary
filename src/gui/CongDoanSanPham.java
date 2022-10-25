@@ -36,7 +36,7 @@ public class CongDoanSanPham extends javax.swing.JPanel {
            modalCD = (DefaultTableModel) tblCongDoan.getModel();
            DocSanPhamVaoTable();
            DocCongDoanVaoTable();
-          
+          txtTrangThai.setEnabled(false);
            
           
            
@@ -46,7 +46,7 @@ public class CongDoanSanPham extends javax.swing.JPanel {
         modelSP.setRowCount(0);
         List<SanPham> listSP = spDao.getALLSP();
         for (SanPham sp : listSP) {
-            Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getThuongHieu(), sp.getDonGia(), sp.getSoLuong(), sp.getDonViTinh()};
+            Object[] row = {sp.getMaSP(), sp.getTenSP(), sp.getThuongHieu(), sp.getDonGia(), sp.soLuongTT(), sp.getDonViTinh()};
             modelSP.addRow(row);
         }
     }
@@ -54,7 +54,8 @@ public class CongDoanSanPham extends javax.swing.JPanel {
         modalCD.setRowCount(0);
         List<CongDoan> listCD = cdDao.getCongDoan();
         for (CongDoan cd : listCD) {
-            Object[] row = {cd.getMaCD(), cd.getMaSP().getMaSP(),cd.getTenSP().getTenSP() ,cd.getTenCD(), cd.getDonGiaCD(), cd.getSoLuong().getSoLuong(), cd.getMaRangBuoc()};
+            
+            Object[] row = {cd.getMaCD(), cd.getMaSP().getMaSP(),cd.getTenSP().getTenSP() ,cd.getTenCD(), cd.getDonGiaCD(), cd.getSoLuong(), cd.getMaRangBuoc(), cd.kiemTraCongDoan()?"đã hoàn thành": "chưa hoàn thành"};
             modalCD.addRow(row);
         }
     }
@@ -67,15 +68,17 @@ public class CongDoanSanPham extends javax.swing.JPanel {
         int soLuong = Integer.parseInt(txtSoLuong.getText());
         int maRangBuoc = Integer.parseInt(cboMaRangBuoc.getSelectedItem().toString());
         
-        SanPham sp = new SanPham(maSP, tenSP, soLuong);
-        CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, sp, maRangBuoc);
+         
+        SanPham sp = new SanPham(maSP, tenSP);
+        CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, soLuong, maRangBuoc);
         List<CongDoan> listCD = cdDao.getCongDoan();
          
             if(cdDao.createCD(cd)){
-                Object[] row = {cd.getMaCD(), cd.getMaSP().getMaSP(), cd.getTenSP().getTenSP(),cd.getTenCD(), cd.getDonGiaCD(), cd.getSoLuong().getSoLuong(), cd.getMaRangBuoc()};
+                Object[] row = {cd.getMaCD(), cd.getMaSP().getMaSP(), cd.getTenSP().getTenSP(),cd.getTenCD(), cd.getDonGiaCD(), cd.getSoLuong(), cd.getMaRangBuoc(), cd.kiemTraCongDoan()?"đã hoàn thành": "chưa hoàn thành"};
             modalCD.addRow(row);
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
             }
+            
     }
     public void suaCD(){
         int row = tblCongDoan.getSelectedRow();
@@ -91,9 +94,10 @@ public class CongDoanSanPham extends javax.swing.JPanel {
             float donGiaCD = Float.parseFloat(txtGiaCD.getText());
             int soLuong = Integer.parseInt(txtSoLuong.getText());
             int maRangBuoc = Integer.parseInt(cboMaRangBuoc.getSelectedItem().toString());
+            Boolean trangThai = Boolean.parseBoolean(txtTrangThai.getText());
            
-            SanPham sp = new SanPham(maSP, tenSP, soLuong);
-            CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, sp, maRangBuoc);
+            SanPham sp = new SanPham(maSP, tenSP);
+            CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, soLuong, maRangBuoc);
             int ques = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa","Attention!",JOptionPane.YES_NO_OPTION);
          if(ques == JOptionPane.YES_OPTION){
              if(cdDao.editCD(cd)){
@@ -160,6 +164,8 @@ public class CongDoanSanPham extends javax.swing.JPanel {
         txtTenSP = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         txtSoLuong = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtTrangThai = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -233,13 +239,13 @@ public class CongDoanSanPham extends javax.swing.JPanel {
 
         tblCongDoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Mã CD", "Mã SP", "Tên SP", "Tên CD", "Đơn Giá CD", "Số Lượng", "Số Công Đoạn"
+                "Mã CD", "Mã SP", "Tên SP", "Tên CD", "Đơn Giá CD", "Số Lượng", "Số Công Đoạn", "TrangThai"
             }
         ));
         tblCongDoan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -258,6 +264,8 @@ public class CongDoanSanPham extends javax.swing.JPanel {
                 txtSoLuongActionPerformed(evt);
             }
         });
+
+        jLabel7.setText("TrangThai");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -297,11 +305,12 @@ public class CongDoanSanPham extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel10)
-                                        .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGap(231, 231, 231)
+                                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(15, 15, 15)
                                         .addComponent(btnThem)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
                                         .addComponent(btnXoa)
                                         .addGap(65, 65, 65)
                                         .addComponent(btnSua)))
@@ -324,9 +333,10 @@ public class CongDoanSanPham extends javax.swing.JPanel {
                                                 .addGap(10, 10, 10)
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                     .addComponent(cboMaRangBuoc, 0, 118, Short.MAX_VALUE)
-                                                    .addComponent(txtSoLuong))))
-                                        .addGap(56, 56, 56)))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 642, Short.MAX_VALUE)))))
+                                                    .addComponent(txtSoLuong)
+                                                    .addComponent(txtTrangThai))))
+                                        .addGap(53, 53, 53)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -360,7 +370,9 @@ public class CongDoanSanPham extends javax.swing.JPanel {
                                 .addGap(51, 51, 51))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jLabel10)
-                                .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtTenSP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7)
+                                .addComponent(txtTrangThai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnXoa)
@@ -424,7 +436,7 @@ public class CongDoanSanPham extends javax.swing.JPanel {
         txtGiaCD.setText(modalCD.getValueAt(row, 4).toString());
         txtSoLuong.setText(modalCD.getValueAt(row, 5).toString());
         cboMaRangBuoc.setSelectedItem(modalCD.getValueAt(row, 6).toString());
-        
+        txtTrangThai.setText(modalCD.getValueAt(row, 7).toString());
      
     }//GEN-LAST:event_tblCongDoanMouseClicked
 
@@ -443,6 +455,7 @@ public class CongDoanSanPham extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -455,5 +468,6 @@ public class CongDoanSanPham extends javax.swing.JPanel {
     private javax.swing.JTextField txtSoLuong;
     private javax.swing.JTextField txtTenCD;
     private javax.swing.JTextField txtTenSP;
+    private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
 }

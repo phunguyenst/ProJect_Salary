@@ -11,6 +11,11 @@ package entity;
 public class PhanCong {
 
     /**
+     * @return the trangThai
+     */
+    
+
+    /**
      * @return the tenSP
      */
     public SanPham getTenSP() {
@@ -105,15 +110,9 @@ public class PhanCong {
     private SanPham tenSP;
     private CongDoan maCD;
     private CongDoan tenCD;
+   
 
     public PhanCong() {
-    }
-
-    public PhanCong(CongNhan maCN, CongNhan tenCN, CongDoan maCD, CongDoan tenCD) {
-        this.maCN = maCN;
-        this.tenCN = tenCN;
-        this.maCD = maCD;
-        this.tenCD = tenCD;
     }
 
     public PhanCong(CongNhan maCN, CongNhan tenCN, SanPham maSP, SanPham tenSP, CongDoan maCD, CongDoan tenCD) {
@@ -124,6 +123,11 @@ public class PhanCong {
         this.maCD = maCD;
         this.tenCD = tenCD;
     }
+
+    
+
+   
+    
 
     
 

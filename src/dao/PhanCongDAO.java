@@ -40,9 +40,11 @@ public class PhanCongDAO {
                 String tenCD = rs.getString(4);
                 String maSP = rs.getString(5);
                 String tenSP = rs.getString(6);
+                
                 CongNhan cn = new CongNhan(maCN, tenCN);
                 CongDoan cd = new CongDoan(maCD, tenCD);
                 SanPham sp = new SanPham(maSP, tenSP);
+                
                 PhanCong pc = new PhanCong(cn, cn, sp, sp, cd, cd);
                 listPC.add(pc);
             }
@@ -66,6 +68,7 @@ public class PhanCongDAO {
             pstm.setString(4, pc.getTenCD().getTenCD());
             pstm.setString(5, pc.getMaSP().getMaSP());
             pstm.setString(6, pc.getTenSP().getTenSP());
+           
             return pstm.executeUpdate()>0;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -85,6 +88,8 @@ public class PhanCongDAO {
             stmt.setString(4, pc.getMaCD().getMaCD());
             stmt.setString(5, pc.getMaSP().getMaSP());
             stmt.setString(6, pc.getTenSP().getTenSP());
+            
+            
             return stmt.executeUpdate() >0;
         } catch (SQLException e) {
             e.printStackTrace();

@@ -37,8 +37,9 @@ public class CongDoanSPDAO {
                 float donGiaCD = rs.getFloat(5);
                 int soLuong = rs.getInt(6);
                 int maRangBuoc = rs.getInt(7);
+                
                 SanPham sp = new SanPham(maSP, tenSP, soLuong);
-                CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, sp, maRangBuoc);
+                CongDoan cd = new CongDoan(maCD, tenCD, sp, sp, donGiaCD, sp.getSoLuong(), maRangBuoc);
                 lstCD.add(cd);
             }
         } catch (SQLException e) {
@@ -51,7 +52,7 @@ public class CongDoanSPDAO {
 	Connection conn = ConnectDB1.getConnection();
 	PreparedStatement pstm = null;
         
-        String sql = "insert into CongDoan values (?,?,?,?,?,?,?)";
+        String sql = "insert into CongDoan values (?,?,?,?,?,?,?, ?)";
         try {
                pstm = conn.prepareStatement(sql);
                pstm.setString(1, cd.getMaCD());
@@ -60,8 +61,9 @@ public class CongDoanSPDAO {
                pstm.setString(3, cd.getTenSP().getTenSP());
                pstm.setString(4, cd.getTenCD());
                pstm.setFloat(5, cd.getDonGiaCD());
-               pstm.setInt(6, cd.getSoLuong().getSoLuong());
+               pstm.setInt(6, cd.getSoLuong());
                pstm.setInt(7, cd.getMaRangBuoc());
+               pstm.setBoolean(8, cd.kiemTraCongDoan());
                return pstm.executeUpdate()>0;
               
         } catch (SQLException e) {
@@ -99,9 +101,9 @@ public class CongDoanSPDAO {
                pstm.setString(2, cd.getTenSP().getTenSP());
                pstm.setString(3, cd.getTenCD());
                pstm.setFloat(4, cd.getDonGiaCD());
-               pstm.setInt(5, cd.getSoLuong().getSoLuong());
+               pstm.setInt(5, cd.getSoLuong());
                pstm.setInt(6, cd.getMaRangBuoc());
-             
+               
                pstm.setString(8, cd.getMaCD());
                return pstm.executeUpdate()>0;
             
@@ -114,7 +116,7 @@ public class CongDoanSPDAO {
         List<CongDoan> lst1 = new ArrayList<CongDoan>();
         ConnectDB1.getInstance();
         Connection conn = ConnectDB1.getConnection();
-        String sql = "select MaCĐ, TenCĐ, SoLuong from CongDoan where MaSP = ?";
+        String sql = "select MaCĐ, TenCĐ, SoLuong, maRangBuoc, trangThai from CongDoan where MaSP = ?";
         try {
             
            PreparedStatement ps = conn.prepareStatement(sql);
@@ -125,8 +127,10 @@ public class CongDoanSPDAO {
                 String maCD = rs.getString(1);
                 String tenCD = rs.getString(2);
                 int soLuong = rs.getInt(3);
+                int maRangBuoc = rs.getInt(4);
+                boolean trangThai = rs.getBoolean(5);
                 SanPham sp = new SanPham(soLuong);
-                CongDoan cd = new CongDoan(maCD, tenCD, sp);
+                CongDoan cd = new CongDoan(maCD, tenCD, sp.getSoLuong(), maRangBuoc);
                 lst1.add(cd);
                
             }

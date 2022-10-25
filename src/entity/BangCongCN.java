@@ -4,7 +4,7 @@
  */
 package entity;
 import gui.PhanCongCN;
-import java.util.Date;
+import java.sql.Date;
 import java.util.Objects;
 
 /**
@@ -13,40 +13,30 @@ import java.util.Objects;
  */
 public class BangCongCN {
 
-    public BangCongCN(String maPhieu, PhanCongCN maPhanCong, CaLamViec maCa, CongNhan maCN, CongDoan maCĐ, int soSPChamCong, boolean diLam, boolean nghiPhep, boolean tangCa, Date ngayCham) {
-        this.maPhieu = maPhieu;
-        this.maPhanCong = maPhanCong;
+    public CaLamViec maCa;
+    public CaLamViec tenCa;
+    public CongNhan maCN;
+    public CongNhan tenCN;
+    public CongDoan maCD;
+    public CongDoan tenCD;
+    public int soLuongLamDc;
+    public Date ngayCham;
+    public CongDoan trangThai;
+    
+//    public int tinhSoLuong(){
+//    
+//    }
+
+    public BangCongCN(CaLamViec maCa, CaLamViec tenCa, CongNhan maCN, CongNhan tenCN, CongDoan maCD,CongDoan tenCD, int soLuongLamDc, Date ngayCham, CongDoan trangThai) {
         this.maCa = maCa;
+        this.tenCa = tenCa;
         this.maCN = maCN;
-        this.maCĐ = maCĐ;
-        this.soSPChamCong = soSPChamCong;
-        this.diLam = diLam;
-        this.nghiPhep = nghiPhep;
-        this.tangCa = tangCa;
+        this.tenCN = tenCN;
+        this.maCD = maCD;
+        this.tenCD = tenCD;
+        this.soLuongLamDc = soLuongLamDc;
         this.ngayCham = ngayCham;
-    }
-
-    public BangCongCN(String maPhieu) {
-        this.maPhieu = maPhieu;
-    }
-
-    public BangCongCN() {
-    }
-
-    public String getMaPhieu() {
-        return maPhieu;
-    }
-
-    public void setMaPhieu(String maPhieu) {
-        this.maPhieu = maPhieu;
-    }
-
-    public PhanCongCN getMaPhanCong() {
-        return maPhanCong;
-    }
-
-    public void setMaPhanCong(PhanCongCN maPhanCong) {
-        this.maPhanCong = maPhanCong;
+        this.trangThai = trangThai;
     }
 
     public CaLamViec getMaCa() {
@@ -57,6 +47,14 @@ public class BangCongCN {
         this.maCa = maCa;
     }
 
+    public CaLamViec getTenCa() {
+        return tenCa;
+    }
+
+    public void setTenCa(CaLamViec tenCa) {
+        this.tenCa = tenCa;
+    }
+
     public CongNhan getMaCN() {
         return maCN;
     }
@@ -65,44 +63,28 @@ public class BangCongCN {
         this.maCN = maCN;
     }
 
-    public CongDoan getMaCĐ() {
-        return maCĐ;
+    public CongNhan getTenCN() {
+        return tenCN;
     }
 
-    public void setMaCĐ(CongDoan maCĐ) {
-        this.maCĐ = maCĐ;
+    public void setTenCN(CongNhan tenCN) {
+        this.tenCN = tenCN;
     }
 
-    public int getSoSPChamCong() {
-        return soSPChamCong;
+    public CongDoan getMaCD() {
+        return maCD;
     }
 
-    public void setSoSPChamCong(int soSPChamCong) {
-        this.soSPChamCong = soSPChamCong;
+    public void setMaCD(CongDoan maCD) {
+        this.maCD = maCD;
     }
 
-    public boolean isDiLam() {
-        return diLam;
+    public int getSoLuongLamDc() {
+        return soLuongLamDc;
     }
 
-    public void setDiLam(boolean diLam) {
-        this.diLam = diLam;
-    }
-
-    public boolean isNghiPhep() {
-        return nghiPhep;
-    }
-
-    public void setNghiPhep(boolean nghiPhep) {
-        this.nghiPhep = nghiPhep;
-    }
-
-    public boolean isTangCa() {
-        return tangCa;
-    }
-
-    public void setTangCa(boolean tangCa) {
-        this.tangCa = tangCa;
+    public void setSoLuongLamDc(int soLuongLamDc) {
+        this.soLuongLamDc = soLuongLamDc;
     }
 
     public Date getNgayCham() {
@@ -113,10 +95,24 @@ public class BangCongCN {
         this.ngayCham = ngayCham;
     }
 
+    public CongDoan getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(CongDoan trangThai) {
+        this.trangThai = trangThai;
+    }
+
+    public CongDoan getTenCD() {
+        return tenCD;
+    }
+
+    public void setTenCD(CongDoan tenCD) {
+        this.tenCD = tenCD;
+    }
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 23 * hash + Objects.hashCode(this.maPhieu);
         return hash;
     }
 
@@ -132,25 +128,11 @@ public class BangCongCN {
             return false;
         }
         final BangCongCN other = (BangCongCN) obj;
-        return Objects.equals(this.maPhieu, other.maPhieu);
+        if (!Objects.equals(this.maCa, other.maCa)) {
+            return false;
+        }
+        return Objects.equals(this.maCN, other.maCN);
     }
-
-    @Override
-    public String toString() {
-        return "BangCongCN{" + "maPhieu=" + maPhieu + ", maPhanCong=" + maPhanCong + ", maCa=" + maCa + ", maCN=" + maCN + ", maC\u0110=" + maCĐ + ", soSPChamCong=" + soSPChamCong + ", diLam=" + diLam + ", nghiPhep=" + nghiPhep + ", tangCa=" + tangCa + ", ngayCham=" + ngayCham + '}';
-    }
-
-
-
-    String maPhieu;
-    PhanCongCN maPhanCong;
-    CaLamViec maCa;
-    CongNhan maCN;
-    CongDoan maCĐ;
-    int soSPChamCong;
-    boolean diLam;
-    boolean nghiPhep;
-    boolean tangCa;
-    Date ngayCham;
-
+    
+   
 }

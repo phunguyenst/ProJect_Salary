@@ -5,12 +5,19 @@
 package entity;
 
 import java.util.Objects;
+import entity.BangCongCN;
+import gui.ChamCongCN;
 
 /**
  *
  * @author admin
  */
 public class CongDoan {
+
+    /**
+     * @return the trangThai
+     */
+
 
     public SanPham getTenSP() {
         return tenSP;
@@ -79,14 +86,14 @@ public class CongDoan {
         this.donGiaCD = donGiaCD;
     }
 
-    public SanPham getSoLuong() {
+    public int getSoLuong() {
         return soLuong;
     }
 
     /**
      * @return the soLuong
      */
-    public void setSoLuong(SanPham soLuong) {    
+    public void setSoLuong(int soLuong) {    
         this.soLuong = soLuong;
     }
 
@@ -113,11 +120,11 @@ public class CongDoan {
     private SanPham maSP;
     private SanPham tenSP;
     private float donGiaCD;
-    private SanPham soLuong;
+    private int soLuong;
     private int maRangBuoc;
-   
+    
 
-    public CongDoan(String maCD, String tenCD, SanPham maSP, SanPham tenSP, float donGiaCD, SanPham soLuong, int maRangBuoc) {
+    public CongDoan(String maCD, String tenCD, SanPham maSP, SanPham tenSP, float donGiaCD, int soLuong, int maRangBuoc ) {
         this.maCD = maCD;
         this.tenCD = tenCD;
         this.maSP = maSP;
@@ -125,16 +132,20 @@ public class CongDoan {
         this.donGiaCD = donGiaCD;
         this.soLuong = soLuong;
         this.maRangBuoc = maRangBuoc;
-     
+        
     }
+    
+   
 
-    public CongDoan(String maCD, String tenCD, SanPham soLuong) {
+    
+    public CongDoan(String maCD, String tenCD, int soLuong, int maRangBuoc) {
         this.maCD = maCD;
         this.tenCD = tenCD;
         this.soLuong = soLuong;
+        this.maRangBuoc = maRangBuoc;
     }
 
-    public CongDoan(SanPham soLuong) {
+    public CongDoan(int soLuong) {
         this.soLuong = soLuong;
     }
 
@@ -168,8 +179,19 @@ public class CongDoan {
         final CongDoan other = (CongDoan) obj;
         return Objects.equals(this.maCD, other.maCD);
     }
+    public boolean kiemTraCongDoan(){
+        
+        boolean tt = true;
+        if(soLuong ==0){
+            tt= true;
+        }
+        else 
+            tt= false;
+        
+        return tt;
+    }
+    
+  
+    
 
-    
-   
-    
 }

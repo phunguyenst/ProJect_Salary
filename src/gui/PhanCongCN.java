@@ -107,16 +107,56 @@ public class PhanCongCN extends javax.swing.JPanel {
         String tenCD = cboTenCD.getSelectedItem().toString();
         String maSP = cboSanPham.getSelectedItem().toString();
         String tenSP = cboTenSP.getSelectedItem().toString();
+        int soCD = Integer.parseInt(txtSoCD.getText());
+        boolean trangThai = Boolean.parseBoolean(txtTrangThai.getText());
         CongNhan cn = new CongNhan(maCN, tenCN);
         CongDoan cd = new CongDoan(maCD, tenCD);
+        System.out.println(trangThai);
+        
         SanPham sp = new SanPham(maSP, tenSP);
         PhanCong pc = new PhanCong(cn, cn, sp, sp, cd, cd);
         List<PhanCong> listPC = pcDao.getPhanCong();
-         if(pcDao.createPC(pc)){
+        
+        
+        if(trangThai == false && soCD==1){
+            if(pcDao.createPC(pc)){
               Object[] row = { pc.getMaCD().getMaCD(),pc.getMaCN().getMaCN(), pc.getTenCN().getTenCN(), pc.getTenCD().getTenCD(), pc.getMaSP().getMaSP(), pc.getTenSP().getTenSP()};
             modelPC.addRow(row);
                 JOptionPane.showMessageDialog(this, "Thêm thành công");
-            }
+            } 
+          
+            
+        }
+        else if(trangThai == false){
+            JOptionPane.showMessageDialog(this, "Công đoạn trước chưa hoàn thành");
+        }
+        else {
+           if(pcDao.createPC(pc)){
+              Object[] row = { pc.getMaCD().getMaCD(),pc.getMaCN().getMaCN(), pc.getTenCN().getTenCN(), pc.getTenCD().getTenCD(), pc.getMaSP().getMaSP(), pc.getTenSP().getTenSP()};
+            modelPC.addRow(row);
+                JOptionPane.showMessageDialog(this, "Thêm thành công");
+               
+            } 
+        }
+//        else{
+//            if(trangThai ==false){
+//                JOptionPane.showMessageDialog(this, "");
+//            }
+//        }
+//        else if(trangThai== false && cd.getSoLuong()>0 ){
+//              
+//            
+//        }
+//        else{
+//            if(pcDao.createPC(pc)){
+//              Object[] row = { pc.getMaCD().getMaCD(),pc.getMaCN().getMaCN(), pc.getTenCN().getTenCN(), pc.getTenCD().getTenCD(), pc.getMaSP().getMaSP(), pc.getTenSP().getTenSP()};
+//            modelPC.addRow(row);
+//                JOptionPane.showMessageDialog(this, "Thêm thành công");
+//               
+////            } 
+//        }
+        
+         
     }
     public void loadComboBoxMaSP(){
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboSanPham.getModel();
@@ -218,6 +258,8 @@ public class PhanCongCN extends javax.swing.JPanel {
         cboSanPham = new javax.swing.JComboBox<>();
         lblTenSP = new javax.swing.JLabel();
         cboTenSP = new javax.swing.JComboBox<>();
+        txtSoCD = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setLayout(null);
@@ -233,7 +275,7 @@ public class PhanCongCN extends javax.swing.JPanel {
 
         jLabel4.setText("Mã Công Đoạn");
         add(jLabel4);
-        jLabel4.setBounds(504, 108, 80, 16);
+        jLabel4.setBounds(500, 110, 80, 16);
 
         cboMaCN.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +300,11 @@ public class PhanCongCN extends javax.swing.JPanel {
         add(jLabel7);
         jLabel7.setBounds(870, 150, 120, 16);
 
+        cboTenCD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTenCDActionPerformed(evt);
+            }
+        });
         add(cboTenCD);
         cboTenCD.setBounds(1037, 99, 158, 22);
         add(jLabel8);
@@ -364,13 +411,13 @@ public class PhanCongCN extends javax.swing.JPanel {
 
         tblCongDoan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Mã CD", "Tên CD", "So Luong Can Lam"
+                "Mã CD", "Tên CD", "So Luong Can Lam", "Số công đoạn", "Trạng thái"
             }
         ));
         tblCongDoan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -400,6 +447,12 @@ public class PhanCongCN extends javax.swing.JPanel {
         cboTenSP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         add(cboTenSP);
         cboTenSP.setBounds(270, 20, 180, 30);
+        add(txtSoCD);
+        txtSoCD.setBounds(681, 150, 120, 22);
+
+        jLabel2.setText("Số CD");
+        add(jLabel2);
+        jLabel2.setBounds(500, 150, 80, 16);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cboMaCNActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboMaCNActionPerformed
@@ -411,6 +464,7 @@ public class PhanCongCN extends javax.swing.JPanel {
     private void btnPhanCongActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPhanCongActionPerformed
         // TODO add your handling code here:
         ThemPhanCong();
+        
     }//GEN-LAST:event_btnPhanCongActionPerformed
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
@@ -434,8 +488,8 @@ public class PhanCongCN extends javax.swing.JPanel {
         List<CongDoan> list = cdDao.LayCacTPTrongCD(maSP);
         modelCD.setRowCount(0);
         for (CongDoan congDoan : list) {
-            System.out.print(congDoan.getSoLuong().getSoLuong());
-            Object[] row = {congDoan.getMaCD(), congDoan.getTenCD(), congDoan.getSoLuong().getSoLuong()};
+            
+            Object[] row = {congDoan.getMaCD(), congDoan.getTenCD(), congDoan.getSoLuong(), congDoan.getMaRangBuoc(), congDoan.kiemTraCongDoan()?"đã hoàn thành": "chưa hoàn thành"};
             modelCD.addRow(row);
         }
         DefaultComboBoxModel model = (DefaultComboBoxModel) cboTenSP.getModel();
@@ -456,7 +510,8 @@ public class PhanCongCN extends javax.swing.JPanel {
        cboMaCD.setSelectedItem(modelCD.getValueAt(row, 0).toString());
        cboTenCD.setSelectedItem(modelCD.getValueAt(row, 1).toString());
         txtSoLuongCL.setText(modelCD.getValueAt(row, 2).toString());
-        
+        txtSoCD.setText(modelCD.getValueAt(row, 3).toString());
+        txtTrangThai.setText(modelCD.getValueAt(row, 4).toString());
     }//GEN-LAST:event_tblCongDoanMouseClicked
 
     private void tblPhanCongMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPhanCongMouseClicked
@@ -473,6 +528,11 @@ public class PhanCongCN extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTrangThaiActionPerformed
 
+    private void cboTenCDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTenCDActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_cboTenCDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private custom_button.MyButton btnPhanCong;
@@ -488,6 +548,7 @@ public class PhanCongCN extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -503,6 +564,7 @@ public class PhanCongCN extends javax.swing.JPanel {
     private javax.swing.JTable tblCongDoan;
     private javax.swing.JTable tblPhanCong;
     private javax.swing.JTextField txtHTCD;
+    private javax.swing.JTextField txtSoCD;
     private javax.swing.JTextField txtSoLuongCL;
     private javax.swing.JTextField txtTrangThai;
     // End of variables declaration//GEN-END:variables
@@ -518,4 +580,15 @@ public class PhanCongCN extends javax.swing.JPanel {
             loadPhanCong();
     }
     }
+
+//    private boolean rangBuocCD(CongDoan cd) {
+//        
+//        boolean trangthai = cd.kiemTraCongDoan();
+//        if(trangthai == false && cd.getMaRangBuoc()== 1){
+//            return true;
+//            
+//        }
+//        else
+//            return false;
+//    }
 }

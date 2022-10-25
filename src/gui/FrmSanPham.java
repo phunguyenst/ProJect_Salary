@@ -14,6 +14,8 @@ import dao.SanPhamDAO;
 import entity.SanPham;
 import java.awt.Image;
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 
 import java.util.List;
@@ -27,6 +29,7 @@ public class FrmSanPham extends javax.swing.JPanel {
     private  SanPhamDAO spDao;
     private String duongDanAnh;
     private String anh;
+    private ArrayList<SanPham> listSP;
     /**
      * Creates new form CongDoanSanPham
      */
@@ -36,9 +39,10 @@ public class FrmSanPham extends javax.swing.JPanel {
         ConnectDB1.getInstance().connect();
          spDao = new SanPhamDAO();
          
-        
+        listSP = (ArrayList<SanPham>) spDao.getALLSP();
         modelSP = (DefaultTableModel) tblSanPham.getModel();
         DocSanPhamVaoTable();
+//        themDuLieuVaoBang(listSP);
        
         
     }
@@ -56,6 +60,14 @@ public class FrmSanPham extends javax.swing.JPanel {
             modelSP.addRow(row);
         }
     }
+//     private void themDuLieuVaoBang(ArrayList<SanPham> listSP){
+//        
+//        for (SanPham sp : listSP) {
+//            modelSP.addRow(new Object[] {
+//                sp.getMaSP(), sp.getTenSP(), sp.getThuongHieu(), sp.getDonGia(), sp.getSoLuong(), sp.getDonViTinh(), sp.getAnh()              
+//            });
+//        }
+//    }
      public void themSP(){
          txtMaSP.setText(spDao.getMaSPTuDong());
          String tenSP = txtTenSP.getText().trim();
@@ -85,6 +97,7 @@ public class FrmSanPham extends javax.swing.JPanel {
             if(ques == JOptionPane.YES_OPTION){
                 String maSP = (String) tblSanPham.getValueAt(row, 0);
                 spDao.removeSP(maSP);
+//                themDuLieuVaoBang(listSP);
                 DocSanPhamVaoTable();
     
             }
@@ -124,11 +137,18 @@ public class FrmSanPham extends javax.swing.JPanel {
          int soLuong = Integer.parseInt(txtSoLuong.getText().trim());
          String donViTinh = cboDonViTinh.getSelectedItem().toString();
          String anh = lblAnh.getText();
-         SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh,anh);
+            
+            int index = anh.lastIndexOf('\\');//lấy path 
+            String name = anh.substring(index+1);
+            System.out.print(name);
+            String hinhAnh = "\\\\src\\\\image\\\\"+ name;  
+         SanPham sp = new SanPham(maSP, tenSP, thuongHieu, donGia, soLuong, donViTinh,hinhAnh);
+          
          int ques = JOptionPane.showConfirmDialog(this, "Bạn có muốn sửa","Attention!",JOptionPane.YES_NO_OPTION);
          if(ques == JOptionPane.YES_OPTION){
              if(spDao.suaSanPham(sp)){
-                 DocSanPhamVaoTable();
+//                 themDuLieuVaoBang(listSP);
+                    DocSanPhamVaoTable();
                  JOptionPane.showMessageDialog(this, "Cập nhật thành công");
              }
              else{
@@ -137,6 +157,17 @@ public class FrmSanPham extends javax.swing.JPanel {
             }
          }
      }
+//     private void suaSanPham(SanPham SanPhamNew) {
+//	spDao.suaSanPham(SanPhamNew);
+//       // xoaDuLieuBang();
+//        ArrayList<SanPham> listDichVuNew = (ArrayList<SanPham>) spDao.getALLSP();//lấy lại danh sách mới
+//        themDuLieuVaoBang(listDichVuNew);
+//	JOptionPane.showMessageDialog(this,"Sửa thành công.");	
+//    }
+     public void xoaDuLieuBang() {
+        
+        modelSP.getDataVector().removeAllElements();
+    }
      
 
     /**
@@ -239,7 +270,7 @@ public class FrmSanPham extends javax.swing.JPanel {
 
         cboDonViTinh.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Thùng", "Lốc", "Chai", "Lon", " " }));
 
-        lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anhsp.jpg"))); // NOI18N
+        lblAnh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/anhsp2.jpg"))); // NOI18N
 
         btnChonAnh.setText("Chọn ảnh");
         btnChonAnh.addActionListener(new java.awt.event.ActionListener() {
@@ -371,7 +402,7 @@ public class FrmSanPham extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -396,6 +427,7 @@ public class FrmSanPham extends javax.swing.JPanel {
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
         // TODO add your handling code here:
            SuaSP();
+          
     }//GEN-LAST:event_btnSuaActionPerformed
 
     private void btnChonAnhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChonAnhActionPerformed

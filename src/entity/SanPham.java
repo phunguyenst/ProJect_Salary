@@ -163,7 +163,7 @@ public class SanPham {
         this.TenSP = TenSP;
     }
     
-   
+  
     
 
     @Override
@@ -197,6 +197,23 @@ public class SanPham {
     public String setDonViTinh() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
-    
+     public int soLuongTT(){
+        int tong;
+        if(getDonViTinh().equalsIgnoreCase("Thùng")){
+            tong= getSoLuong()*24;
+        }
+        else if(getDonViTinh().equalsIgnoreCase("Lốc")){
+            tong = getSoLuong()*6;
+        }
+        else{
+            tong = getSoLuong();
+        }
+        return tong;
+    }
+
+    public void setImage(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+ 
 }

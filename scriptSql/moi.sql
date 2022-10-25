@@ -154,6 +154,7 @@ CREATE TABLE [dbo].[PhanCong](
 	[TenCD] [nvarchar](255) NOT NULL,
 	[MaSP] [nvarchar](255) NOT NULL,
 	[TenSP][nvarchar](255) NOT NULL,
+	
 )
 
 GO
@@ -254,6 +255,7 @@ CREATE TABLE [dbo].[CongDoan](
 	[DonGiaCĐ] [float] NOT NULL, 
     [SoLuong] [int] NOT NULL,
     [MaRangBuoc] int NOT NULL,
+	[TrangThai] [bit] not null,
 ) 
 
 GO
@@ -366,16 +368,16 @@ INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayTham
 INSERT [dbo].[NhanVienHanhChanh] ([MaNV], [MaPB], [TenNV], [NgaySinh], [NgayThamGiaCT], [DiaChi], [Sđt], [GioiTinh], [TrinhDo]) VALUES (N'NV03', N'SX', N'Nguyễn Thị Hoàng Khánh',CAST(N'1979-11-03' AS Date),CAST(N'2022-09-21' AS Date),N'Long An',N'0903412123',N'Nữ',N'Đại Học' )
 GO
 
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh], [Anh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,250,N'Thùng', '\\src\image\\anhsp.jpg' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,200,N'Thùng','\\src\image\\anhsp2.jpg' )
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,300,N'Thùng','\\src\image\\anhsp3.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh], [Anh]) VALUES (N'SP01', N'PepSi Zero', N'PepsiCo',15000,5,N'Thùng', '\\src\image\\anhsp1.jpg' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP02', N'Cocacola vị orginal', N'Coca-Cola',12000,4,N'Thùng','\\src\image\\anhsp2.jpg' )
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP03', N'Sting vị dâu', N'Coca-Cola',17000,6,N'Thùng','\\src\image\\anhsp3.jpg')
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP04', N'Nước khoáng i-on Pocari Sweat', N'Warrior',9000,200,N'Chai','\\src\image\\anhsp4.jpg' )
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP05', N'Nước tăng lực Warrior hương nho', N'Coca-Cola',10000,300,N'Chai','\\src\image\\anhsp5.jpg')
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP06', N'Nước tinh khiết Aquafina', N'Aquafina',5000,30,N'Thùng','\\src\image\\anhsp6.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP06', N'Nước tinh khiết Aquafina', N'Aquafina',5000,10,N'Thùng','\\src\image\\anhsp6.jpg')
 INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP07', N'Nước tinh khiết Dasani', N'Danasi',17000,300,N'Thùng','\\src\image\\anhsp7.jpg')
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP08', N'Sữa trái cây Nutriboost hương cam', N'Nutriboost',35000,20,N'Thùng','\\src\image\\anhsp8.jpg')
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP09', N'Nước sữa trái cây TH True Milk cam', N'TH True Juice Milk',17000,300,N'Thùng','\\src\image\\anhsp9.jpg')
-INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP10', N'Nước ngọt Fanta hương xá xị', N'Fanta',17000,300,N'Thùng','\\src\image\\anhsp10.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP08', N'Sữa trái cây Nutriboost hương cam', N'Nutriboost',35000,10,N'Thùng','\\src\image\\anhsp8.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP09', N'Nước sữa trái cây TH True Milk cam', N'TH True Juice Milk',17000,2,N'Thùng','\\src\image\\anhsp9.jpg')
+INSERT [dbo].[SanPham] ([MaSP], [TenSP], [ThuongHieu], [DonGia], [SoLuong], [DonViTinh],[Anh]) VALUES (N'SP10', N'Nước ngọt Fanta hương xá xị', N'Fanta',17000,3,N'Thùng','\\src\image\\anhsp10.jpg')
 GO
 go
 
